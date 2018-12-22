@@ -1,5 +1,8 @@
 package BuyerBehaviours;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import Etc.BehaviourKiller;
 import Etc.Book;
 import jade.core.AID;
@@ -7,13 +10,10 @@ import jade.core.Agent;
 import jade.core.behaviours.DataStore;
 import jade.core.behaviours.OneShotBehaviour;
 import jade.domain.DFService;
+import jade.domain.FIPAException;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
-import jade.domain.FIPAException;
 import jade.lang.acl.ACLMessage;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class StartOfBuying extends OneShotBehaviour {
     private Agent agent;
@@ -47,7 +47,10 @@ public class StartOfBuying extends OneShotBehaviour {
             getDataStore().put("sellersFound", receivers);
             ACLMessage request = new ACLMessage(ACLMessage.REQUEST);
             request.setProtocol("bookBuying");
-            request.setContent(bookList.get(0) + "");
+            request.setContent(bookList.get(0).getTitle() + "");
+            System.out.println( "Agent " + agent.getLocalName() + " said: I've sent a request for "
+                    + bookList.get(0).getTitle());
+
             for (AID rec : receivers) {
                 request.addReceiver(rec);
             }

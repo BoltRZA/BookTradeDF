@@ -1,5 +1,7 @@
 package SellerBehaviours;
 
+import java.util.List;
+
 import Etc.BehaviourKiller;
 import Etc.Book;
 import Etc.BookTitle;
@@ -9,13 +11,11 @@ import jade.core.behaviours.DataStore;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 
-import java.util.List;
-
 
 public class WaitingForRequest extends Behaviour {
 
     private Agent agent;
-    private boolean msgArried = false;
+    private boolean msgArrived = false;
     private List<Book> bookList;
 
     public WaitingForRequest(Agent agent, DataStore ds){
@@ -33,7 +33,7 @@ public class WaitingForRequest extends Behaviour {
 
         if (request!= null){
             ACLMessage answer =request.createReply();
-            msgArried = true;
+            msgArrived = true;
             BookTitle requestedBook = BookTitle.valueOf(request.getContent());
 
             double offeredPrice = 0;
@@ -64,7 +64,7 @@ public class WaitingForRequest extends Behaviour {
     @Override
     public boolean done() {
 
-        return msgArried;
+        return msgArrived;
     }
     @Override
     public int onEnd(){

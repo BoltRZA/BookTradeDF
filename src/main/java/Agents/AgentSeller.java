@@ -16,6 +16,7 @@ import java.util.List;
 
 public class AgentSeller extends Agent {
     private List<Book> bookList;
+    
 
     private void createSettingForSeller (List<Book>  bookList) {
         if (this.getLocalName().equals("Seller1")){
@@ -44,10 +45,10 @@ public class AgentSeller extends Agent {
         DataStore dataStore = new DataStore();
         dataStore.put("bookList", bookList);
         DFAgentDescription dfAgentDescription = new DFAgentDescription();
-        dfAgentDescription.setName(getAID());
+        dfAgentDescription.setName(this.getAID());
         ServiceDescription serviceDescription = new ServiceDescription();
         serviceDescription.setType("bookTrading");
-        serviceDescription.setName(getName() + "-BT");
+        serviceDescription.setName(this.getLocalName() + "-BT");
         dfAgentDescription.addServices(serviceDescription);
         try {
             DFService.register(this, dfAgentDescription);

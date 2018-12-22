@@ -74,6 +74,7 @@ public class WaitingForResponse extends Behaviour {
     public int onEnd() {
         if (behaviourDone && bestSeller != null) {
             System.out.println("Winner is "  + bestSeller.getLocalName());
+            System.out.println("Sending proposal to Agent " + bestSeller.getLocalName() + " ....");
             SendProposal behaviour = new SendProposal(agent, getDataStore(), bestSeller, bestPrice);
             agent.addBehaviour(behaviour);
             agent.addBehaviour(new BehaviourKiller(agent,2000, behaviour));
